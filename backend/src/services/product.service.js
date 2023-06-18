@@ -16,7 +16,7 @@ const findById = async (id) => {
   return { type: null, message: result };
 };
 
-const postProduct = async (name) => {
+const createProduct = async (name) => {
   const result = await productModel.postProduct(name);
 
   return { type: null, message: result };
@@ -25,5 +25,5 @@ const postProduct = async (name) => {
 module.exports = {
   getAll,
   findById,
-  postProduct,
+  createProduct,
 };

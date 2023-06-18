@@ -18,10 +18,12 @@ describe('Testa o model de produtos', function () {
     expect(response).to.be.deep.equal(products[0]);
   });
 
-  it('Cria um novo produto na camada model', async function () {
-    sinon.stub(connection, 'execute').resolves([newProduct]);
-    const response = await productModel.postProduct(newProduct.name);
-    expect(response).to.be.deep.equal(newProduct);
+  it('Testa criar novo produto na camada model', async function () {
+    sinon.stub(connection, 'execute').resolves([[newProduct]]);
+
+    const result = await productModel.postProduct({ name: 'Mjolnir' });
+
+    expect(result).to.be.deep.equal(newProduct);
   });
 
   afterEach(function () {

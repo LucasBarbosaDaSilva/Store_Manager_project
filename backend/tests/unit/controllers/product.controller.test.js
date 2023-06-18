@@ -4,6 +4,7 @@ const sinonChai = require('sinon-chai');
 const { products, newProduct } = require('./mock/product.controller.mock');
 const { productService } = require('../../../src/services');
 const { productController } = require('../../../src/controllers');
+const { validationNewProduct } = require('../../../src/middlewares/validateProduct');
 
 const { expect } = chai;
 
@@ -42,18 +43,21 @@ describe('Testa a camada controller', function () {
   });
 
   it('Testa se é possível cadastrar um novo produto', async function () {
-   const res = {};
-    const req = {
+   const req = {
       body: { name: 'Mjolnir' },
     };
+    const res = {};
+    const next = sinon.stub();
 
     res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
+    res.json = sinon.stub().returns(res);
 
-    sinon.stub(productService, 'postProduct').resolves({ message: newProduct });
+    sinon.stub(productService, 'createProduct').resolves({ type: null, message: newProduct });
 
+    await validationNewProduct(req, res, next);
     await productController.postProduct(req, res);
 
+    expect(next).to.have.been.calledWith();
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(newProduct);
   });

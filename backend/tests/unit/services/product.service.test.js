@@ -21,7 +21,8 @@ describe('Testa a camada service de Produtos', function () {
 
   it('Testa se é possível criar um novo produto', async function () {
     sinon.stub(productModel, 'postProduct').resolves(newProduct);
-    const result = await productService.postProduct(newProduct.name);
+
+    const result = await productService.createProduct({ name: 'Mjolnir' });
 
     expect(result.type).to.be.equal(null);
     expect(result.message).to.be.deep.equal(newProduct);

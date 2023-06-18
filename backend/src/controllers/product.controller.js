@@ -16,7 +16,7 @@ const findById = async (req, res) => {
 
 const postProduct = async (req, res) => {
   const { name } = req.body;
-  const { message } = await productService.postProduct(name);
+  const { message } = await productService.createProduct(name);
 
   return res.status(201).json(message);
 };

@@ -1,26 +1,37 @@
 const connection = require('./connection');
 
 const getAllSales = async () => {
-  const [sales] = await connection.execute(
-    `SELECT sl.date, sl.id AS saleId, pr.product_id AS producId, prquantity 
-    FROM sales_products AS pr 
-    INNER JOIN sales AS sl ON sl.id = sale_id 
-    ORDER BY sl.id, product_id ASC;`,
-     );
-
-  return sales;
+  const [result] = await connection.execute(
+    `SELECT 
+      sl.sale_id AS saleId,
+      pr.date,
+      sl.product_id AS productId,
+      sl.quantity
+    FROM
+      sales_products AS sl
+        INNER JOIN
+      sales AS pr ON pr.id = sl.sale_id
+    ORDER BY sl.sale_id , sl.product_id`,
+    );
+  
+    return result;
 };
 
 const getSaleById = async (id) => {
   const [sale] = await connection.execute(
-    `SELECT sl.date pr.product_id AS producId, pr.quantity 
-    FROM sales_products AS pr 
-    INNER JOIN sales AS sl ON sl.id = sale_id AND sale_id = ?
-    ORDER BY sl.id, product_id ASC;`,
+    `SELECT 
+    pr.date, sl.product_id AS productId, sl.quantity
+    FROM
+      sales_products AS sl
+          INNER JOIN
+      sales AS pr ON pr.id = sl.sale_id
+    WHERE
+    sl.sale_id = ?
+    ORDER BY sl.sale_id , sl.product_id`,
     [id],
-  );
-
-  return sale;
+    );
+  
+    return sale;
 };
 
 module.exports = {
