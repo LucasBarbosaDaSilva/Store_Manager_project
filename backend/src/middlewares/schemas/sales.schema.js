@@ -1,12 +1,11 @@
-const validateProductId = (arraySales) => {
-  console.log(arraySales);
-  const ids = arraySales.map((sale) => sale.productId);
+const validateId = (sales) => {
+  const ids = sales.map((sale) => sale.productId);
   if (ids.includes(undefined)) return { status: 400, message: '"productId" is required' };
   return { status: null, message: '' };
 };
 
-const validateQuantity = (arraySales) => {
-  const quantity = arraySales.map((sale) => sale.quantity);
+const validateQuantity = (sales) => {
+  const quantity = sales.map((sale) => sale.quantity);
   if (quantity.includes(undefined)) return { status: 400, message: '"quantity" is required' };
   const quantityEvery = quantity.every((value) => value < 1);
   if (quantityEvery) {
@@ -16,6 +15,6 @@ const validateQuantity = (arraySales) => {
 };
 
 module.exports = {
-  validateProductId,
+  validateId,
   validateQuantity,
 };

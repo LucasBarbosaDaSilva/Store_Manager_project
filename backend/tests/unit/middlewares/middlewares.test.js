@@ -1,20 +1,15 @@
 const sinon = require('sinon');
 const chai = require('chai');
 const sinonChai = require('sinon-chai');
-const { 
-  salesMockCreateCorrect, 
-  salesMockCreateError1,
-  salesMockCreateError2,
-  salesMockCreateError3,
-} = require('./mock/middlewares.mock');
+const { error, salesValidationMock } = require('./mock/middlewares.mock');
 const { validateSales } = require('../../../src/middlewares/validateSales');
 
 const { expect } = chai;
 chai.use(sinonChai);
 
-describe('Test sales Validator', function () {
-  it('01 - If it call next function', async function () {
-    const req = { body: salesMockCreateCorrect };
+describe('Testando validação de sales, requisito 6', function () {
+  it('Teste se chama a proxima função', async function () {
+    const req = { body: salesValidationMock };
     const res = {};
     const next = sinon.stub().returns();
 
@@ -26,8 +21,8 @@ describe('Test sales Validator', function () {
     expect(next).to.have.been.calledWith();
   });
 
-  it('02 - If it return message productId', async function () {
-    const req = { body: salesMockCreateError1 };
+  it('Testa se retorna a mensagem "productId" is required', async function () {
+    const req = { body: error };
     const res = {};
 
     res.status = sinon.stub().returns(res);
