@@ -11,7 +11,17 @@ const getSaleById = async (id) => {
   return { type: null, message: sale };
 };
 
+const createSale = async (arraySales) => {
+  try {
+    const newSaleId = await salesModel.createSale(arraySales);
+    return { type: null, message: { id: newSaleId, itemsSold: arraySales } };
+  } catch (error) {
+    return { type: 404, message: 'Product not found' };
+  }
+};
+
 module.exports = {
   getAllSales,
   getSaleById,
+  createSale,
 };
