@@ -32,6 +32,14 @@ describe('Testa o model de produtos', function () {
     expect(result).to.be.deep.equal(upDate);
   });
 
+  it('Testa deletar um produto na camada model', async function () {
+    const deletedProduct = [{ affectedRows: 1 }];
+    sinon.stub(connection, 'execute').resolves(deletedProduct);
+    const result = await productModel.deleteProduct(1);
+
+    expect(result).to.be.deep.equal(deletedProduct[0].affectedRows);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

@@ -62,6 +62,22 @@ describe('Testa a camada controller', function () {
     expect(res.json).to.have.been.calledWith(newProduct);
   });
 
+  it('Testa se é possível deletar um produto', async function () {
+    const req = {};
+    const res = {};
+    req.params = { id: 1 };
+
+    res.status = sinon.stub().returns(res);
+    res.end = sinon.stub().returns();
+
+    sinon.stub(productService, 'deleteProduct').resolves({ type: null });
+
+    await productController.deleteProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.end).to.have.been.calledWith();
+  });
+
   afterEach(function () {
     sinon.restore();
   });

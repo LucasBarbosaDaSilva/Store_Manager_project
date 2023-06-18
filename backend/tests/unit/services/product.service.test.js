@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 const { productModel } = require('../../../src/models');
-const { products, newProduct } = require('./mock/product.service.mock');
+const { products, newProduct, productDelet } = require('./mock/product.service.mock');
 const { productService } = require('../../../src/services');
 
 describe('Testa a camada service de Produtos', function () {
@@ -36,6 +36,16 @@ describe('Testa a camada service de Produtos', function () {
 
     expect(result.type).to.be.equal(null);
     expect(result.message).to.be.deep.equal(products[1]);
+  });
+
+  it('Testa se é possível deletar um produto', async function () {
+    sinon.stub(productModel, 'findById').resolves([productDelet]);
+    sinon.stub(productModel, 'deleteProduct').resolves(5);
+
+    const result = await productService.deleteProduct(5);
+
+    expect(result.type).to.be.equal(null);
+    expect(result.message).to.be.deep.equal(5);
   });
 
   afterEach(function () {

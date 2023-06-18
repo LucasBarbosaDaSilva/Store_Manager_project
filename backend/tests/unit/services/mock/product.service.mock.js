@@ -31,9 +31,17 @@ const editUpdate = [
   },
 ];
 
+const productDelet = [
+  {
+    id: 5,
+    name: 'Vespa',
+  },
+];
+
 module.exports = {
   products,
   newProduct,
   upDate,
   editUpdate,
+  productDelet,
 };
