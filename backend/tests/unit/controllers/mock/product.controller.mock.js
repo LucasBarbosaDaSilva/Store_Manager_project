@@ -18,7 +18,30 @@ const newProduct = {
   name: 'Mjolnir',
 };
 
+const upDate = [
+  {
+    id: 2,
+    name: 'Arco e Flecha do Gavião Arqueiro',
+  },
+];
+
+const editUpdate = [
+  {
+    name: 'Arco e Flecha do Gavião Arqueiro',
+  },
+];
+
+const productDelet = [
+  {
+    id: 5,
+    name: 'Vespa',
+  },
+];
+
 module.exports = {
   products,
   newProduct,
+  productDelet,
+  upDate,
+  editUpdate,
 };
