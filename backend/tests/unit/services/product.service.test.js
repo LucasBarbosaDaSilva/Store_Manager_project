@@ -28,6 +28,16 @@ describe('Testa a camada service de Produtos', function () {
     expect(result.message).to.be.deep.equal(newProduct);
   });
 
+  it('Testa se é possível atualizar um produto', async function () {
+    sinon.stub(productModel, 'updateProduct').resolves(products[1]);
+
+    const result = await productService
+    .updateProduct(2, { name: 'Arco e Flecha do Gavião Arqueiro' });
+
+    expect(result.type).to.be.equal(null);
+    expect(result.message).to.be.deep.equal(products[1]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
