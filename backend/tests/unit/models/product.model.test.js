@@ -40,6 +40,17 @@ describe('Testa o model de produtos', function () {
     expect(result).to.be.deep.equal(deletedProduct[0].affectedRows);
   });
 
+ it('Testa buscar um produto pelo nome na camada model', async function () {
+    const name = 'Mjolnir';
+
+    sinon.stub(connection, 'execute').resolves([products[0]]);
+
+    const result = await productModel.getByQuery({ q: name });
+
+    expect(result).to.be.deep.equal(products[0]);
+    expect(result).to.have.property('id');
+  });
+
   afterEach(function () {
     sinon.restore();
   });

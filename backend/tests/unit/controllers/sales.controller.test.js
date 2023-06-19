@@ -57,6 +57,26 @@ describe('Testa a camada controller de Sales', function () {
     expect(res.status).to.have.been.calledWith(204);
   });
 
+  it('Testa se cria uma venda', async function () {
+    const req = {
+      body: {
+        productId: 1,
+        quantity: 1,
+      },
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(salesService, 'createSale').resolves({ message: salesList[0], type: null });
+
+    await salesController.newSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(salesList[0]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

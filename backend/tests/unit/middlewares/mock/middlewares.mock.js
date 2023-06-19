@@ -8,6 +8,17 @@ const error = [
   },
 ];
 
+const error1 = [
+  {
+    productId: 1,
+    quantity: 1,
+  },
+  {
+    productId: 2,
+    quantity: 5,
+  },
+];
+
 const salesValidationMock = [
   {
     productId: 1,
@@ -21,5 +32,6 @@ const salesValidationMock = [
 
 module.exports = {
   error,
+  error1,
   salesValidationMock,
 };

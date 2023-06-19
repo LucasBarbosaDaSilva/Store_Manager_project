@@ -48,6 +48,17 @@ describe('Testa a camada service de Produtos', function () {
     expect(result.message).to.be.deep.equal(5);
   });
 
+  it('Testa se é possível buscar um produto pelo nome na camada service', async function () {
+    const name = 'Mjolnir';
+
+    sinon.stub(productModel, 'getByQuery').resolves(products[0]);
+
+    const result = await productService.getByQuery({ q: name });
+
+    expect(result.type).to.be.equal(null);
+    expect(result.message).to.be.deep.equal(products[0]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
