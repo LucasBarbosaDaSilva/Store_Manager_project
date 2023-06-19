@@ -41,6 +41,22 @@ describe('Testa a camada controller de Sales', function () {
     expect(res.json).to.have.been.calledWith(salesList[0]);
   });
 
+  it('Testa se deleta uma venda', async function () {
+    const req = {};
+    const res = {};
+
+    req.params = { id: 1 };
+
+    res.status = sinon.stub().returns(res);
+    res.end = sinon.stub().returns();
+
+    sinon.stub(salesService, 'deleteSale').resolves({ type: null });
+
+    await salesController.deleteSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

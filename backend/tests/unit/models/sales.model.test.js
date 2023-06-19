@@ -18,6 +18,13 @@ describe('Testa a camada model de Sales', function () {
     expect(sale).to.be.deep.equal(salesList[0]);
   });
 
+  it('Testa se deleta uma venda', async function () {
+    const saleRemove = [{ affectedRows: 1 }];
+    sinon.stub(connection, 'execute').resolves(saleRemove);
+    const sale = await salesModel.deleteSale(salesList.id);
+    expect(sale).to.be.deep.equal(1);
+  });
+
   afterEach(function () {
     sinon.restore();
   });
